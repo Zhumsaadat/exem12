@@ -8,8 +8,10 @@ import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute.tsx';
 import {selectUser} from './features/Users/usersSlice.ts';
 import {useAppSelector} from './App/hooks.ts';
 import PhotoGalleryForm from './features/PhotoGallery/PhotoGalleryForm.tsx';
+import Photos from './features/PhotoGallery/Photos.tsx';
 
-function App() {
+
+const App = () => {
   const user = useAppSelector(selectUser);
   return (
     <>
@@ -17,6 +19,8 @@ function App() {
         <AppToolbar />
       </header>
       <Routes>
+        <Route path="/" element={<Photos />} />
+        <Route path="/photos/:id" element={<div>Thats profile</div>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/addPhoto" element={
