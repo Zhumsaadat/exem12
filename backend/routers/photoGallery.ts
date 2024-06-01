@@ -16,7 +16,7 @@ photoGalleryRouter.get('/', async (req, res, next) => {
     } else{
       photos = await PhotoGallery.find();
     }
-    res.send(photos);
+    return res.send(photos);
   } catch (err) {
     return next(err);
   }
@@ -75,12 +75,10 @@ photoGalleryRouter.delete('/:id', auth, permit('admin', 'user'), async (req: Req
 
     await PhotoGallery.findByIdAndDelete(photoId);
     console.log(PhotoGallery.findById(photoId));
-    return res.status(204).send({message: 'Photo is deleted'});
+    return res.send({message: 'One photo deleted'});
   }catch (error) {
     next(error);
   }
 });
-
-
 
 export default photoGalleryRouter;
