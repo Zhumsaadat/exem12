@@ -7,12 +7,13 @@ import permit from '../middleware/permit';
 
 const photoGalleryRouter = Router();
 
+
 photoGalleryRouter.get('/', async (req, res, next) => {
   try {
     let photos;
     const user = req.query.user as string;
     if(user){
-      photos = await PhotoGallery.find({user: user});
+      photos = await PhotoGallery.find({user: user}).populate({path: 'user', select: '_id displayName'});
     } else{
       photos = await PhotoGallery.find();
     }

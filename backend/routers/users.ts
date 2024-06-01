@@ -33,13 +33,13 @@ usersRouter.post('/', imageUpload.single('avatar'), async (req, res, next) => {
   }
 });
 
-usersRouter.get('/', async (reg, res) => {
+usersRouter.get('/', async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select('-token');
 
     return res.send(users);
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    return next(err);
   }
 });
 
